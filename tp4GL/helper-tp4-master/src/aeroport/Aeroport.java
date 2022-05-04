@@ -7,17 +7,16 @@ public class Aeroport {
     private String nom;
 
     //private String ville;
-    private ArrayList<Ville> mesVilles = new ArrayList<Ville>;
+    private ArrayList<Ville> mesVilles;
 
-    private C
-
-    public Aeroport(String nom, Ville...mesVilles) {
+    public Aeroport(String nom, Ville...villes) {
         Objects.requireNonNull(nom, "Nom doit être non null");
         this.nom = nom;
-        this.ville = mesVille.getVille();
+        this.mesVilles = new ArrayList<Ville>;
+        for(Ville i: villes){
+            addVille(i);
+        }
     }
-
-    public
 
     public String getNom() {
         return this.nom;
@@ -27,11 +26,20 @@ public class Aeroport {
         this.nom = nom;
     }
 
-    public String getVille() {
+   /* public String getVille() {
         return this.ville;
     }
 
     public void setVille(String ville) {
         this.ville = ville;
     }
+*/
+
+    public void addVille(Ville v){
+        if(!this.mesVilles.contains(v)){
+            this.mesVilles.add(v);
+            v.addAeroport(this);
+        }
+    }
+
 }
