@@ -3,8 +3,13 @@ package aeroport;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.Objects; 
+import java.util.ArrayList;
 
 public class Vol {
+
+    private static ArrayList<String> numVols = new ArrayList<>();
+    private static ArrayList<Escale> mesEscales = new ArrayList<>();
 
     private String numero;
 
@@ -41,11 +46,18 @@ public class Vol {
         this.dateArrivee = dateArrivee;
     }
 
-    public Vol() {
+    public Vol(String numero, Aeroport depart, Aeroport Arrivee, Date departDate, Date dateArrivee) {
     }
 
-    protected Vol(String numero){
-        this.numero = numero;
+    public Vol(String numero) throws IllegalArgumentException{
+        Objects.requireNonNull(numero);
+        if(numVols.contains(numero)){
+            throw new IllegalArgumentException("Numéro de vol déja existe; choisir un autre");
+        }
+        else{
+            numVols.add(numero);
+            this.numero = numero;
+        }
     }
 
     public Compagnie getCompagnie() {
@@ -79,6 +91,7 @@ public class Vol {
     }
 
     public void setDepart(Aeroport depart) {
+        Objects.requireNonNull(depart);
         this.depart = depart;
     }
 

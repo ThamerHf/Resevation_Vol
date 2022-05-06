@@ -1,5 +1,6 @@
 package aeroport;
 
+import java.util.Objects;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -10,7 +11,9 @@ public class Compagnie {
     private Collection<Vol> vols = new ArrayList<>();
 
 
-    public Compagnie() {
+    public Compagnie(String name) {
+        Objects.requireNonNull(name);
+        this.name = name;
     }
 
     public String getName() {
@@ -44,6 +47,7 @@ public class Compagnie {
         this.vols.add(vol);
     }
 
+    
     public void removeVol(Vol vol){
         vol.setCompagnieWithoutBidirectional(null);
         this.vols.remove(vol);
