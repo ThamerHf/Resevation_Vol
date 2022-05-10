@@ -1,8 +1,11 @@
 package reservation;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Client {
+
+    private ArrayList<Reservation> reservations = new ArrayList<>();
 
     private String nom;
 
@@ -52,6 +55,22 @@ public class Client {
     public void setReference(String reference) {
         Objects.requireNonNull(reference, "reference doit être non NULL");
         this.reference = reference;
+    }
+
+    public void setReservation(ArrayList<Reservation> reservation) {
+        Objects.requireNonNull(reservation, "reservation doit être non NULL");
+        this.reservations = reservation;
+    }
+
+    public void addReservation(Reservation reservation){
+        Objects.requireNonNull(reservation, "reservvation ne doit pas être null");
+        
+        this.reservations.add(reservation);
+    }
+
+    public void removeReservation(Reservation reservation){
+        Objects.requireNonNull(reservation, "reservvation ne doit pas être null");
+        this.reservations.remove(reservation);
     }
 
 
