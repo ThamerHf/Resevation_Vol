@@ -2,7 +2,6 @@ package aeroport;
 
 import java.util.Objects;
 
-import reservation.Reservation;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,27 +12,11 @@ public class Compagnie {
 
     private Collection<Vol> vols = new ArrayList<>();
 
-    private ArrayList<Reservation> reservations = new ArrayList<>();
-
 
     public Compagnie(String name) {
         this.setName(name);
     }
 
-    public ArrayList<Reservation> getReservations() {
-        return this.reservations;
-    }
-
-    public void setReservations(ArrayList<Reservation> reservations) {
-        Objects.requireNonNull(reservations, "reservation ne doit pass être NULL");
-        this.reservations = reservations;
-    }
-
-    public void addReservation(Reservation reservation) {
-        Objects.requireNonNull(reservations, "reservation ne doit pass être NULL");
-        reservation.setCompagnie(this);
-        this.reservations.add(reservation);
-    }
 
     public String getName() {
         return this.name;
@@ -45,7 +28,7 @@ public class Compagnie {
     }
 
     public Collection<Vol> getVols() {
-        return vols;
+        return this.vols;
     }
 
     public void setVols(Collection<Vol> vols) {

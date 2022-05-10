@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.lang.Integer;
 
 import aeroport.Compagnie;
+import aeroport.Vol;
 
 import java.util.ArrayList;
 
@@ -19,17 +20,17 @@ public class Reservation {
 
     private String numero;
 
-    private Compagnie compagnie;
+    private Vol vol;
 
     private Date date;
 
     private boolean confirme;
 
-    public Reservation(Client client, Passager passager, Compagnie compagnie, Date date) {
+    public Reservation(Client client, Passager passager, Vol vol, Date date) {
         this.setClient(client);
         this.setPassager(passager);
         this.setNumero();
-        this.setCompagnie(compagnie);
+        this.setVol(vol);
         this.setDate(date);
         this.confirme = false;
     }
@@ -60,10 +61,10 @@ public class Reservation {
         next++;
         Integer i = new Integer(next);
         
-        if(compagnie.getName().length() < 3) {
-            return compagnie.getName().concat(i.toString());
+        if(vol.getCompagnie().getName().length() < 3) {
+            return vol.getCompagnie().getName().concat(i.toString());
         }
-        return compagnie.getName().substring(0, 2).concat(i.toString());
+        return vol.getCompagnie().getName().substring(0, 2).concat(i.toString());
     }
 
     public Client getClient() {
@@ -75,13 +76,13 @@ public class Reservation {
         this.client = client;
     }
 
-    public Compagnie getCompagnie() {
-        return this.compagnie;
+    public Vol getVOl() {
+        return this.vol;
     }
 
-    public void setCompagnie(Compagnie companie) {
-        Objects.requireNonNull(companie, "companie ne doit pas être NULL");
-        this.compagnie = companie;
+    public void setVol(Vol vol) {
+        Objects.requireNonNull(vol, "vol ne doit pas être NULL");
+        this.vol = vol;
     }
 
     public void confirmer() {

@@ -3,13 +3,19 @@ package aeroport;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
-import java.util.Objects; 
+import java.util.Objects;
+
+import reservation.Reservation;
+
 import java.util.ArrayList;
 
 public class Vol {
 
     private static ArrayList<String> numVols = new ArrayList<>();
+
     private static ArrayList<Escale> mesEscales = new ArrayList<>();
+
+    private ArrayList<Reservation> reservations = new ArrayList<>();
 
     private String numero;
 
@@ -126,6 +132,21 @@ public class Vol {
 
     public void fermerVol() {
         this.statut = false;
+    }
+
+    public ArrayList<Reservation> getReservations() {
+        return this.reservations;
+    }
+
+    public void setReservations(ArrayList<Reservation> reservations) {
+        Objects.requireNonNull(reservations, "reservation ne doit pass être NULL");
+        this.reservations = reservations;
+    }
+
+    public void addReservation(Reservation reservation) {
+        Objects.requireNonNull(reservations, "reservation ne doit pass être NULL");
+        reservation.setVol(this);
+        this.reservations.add(reservation);
     }
 
     @Override
