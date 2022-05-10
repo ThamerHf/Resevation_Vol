@@ -38,13 +38,14 @@ public class Aeroport {
         }
     }
 
-    /* public String getVille() {
-        return this.ville;
+    public ArrayList<Ville> getVille() {
+        return this.mesVilles;
     }
 
-    public void setVille(String ville) {
-        this.ville = ville;
+    public void setVille(ArrayList<Ville> ville) {
+        Objects.requireNonNull(ville);
+        this.mesVilles = ville;
     }
-*/
+
 
 }

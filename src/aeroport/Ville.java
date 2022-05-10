@@ -26,6 +26,11 @@ public class Ville{
         return this.mesAeroports;
     }
 
+    public void setAeroport(ArrayList<Aeroport> a) {
+        Objects.requireNonNull(a);
+        this.mesAeroports = a;
+    }
+
     public void addAeroport(Aeroport a){
         Objects.requireNonNull(a, "l'aeroport ne peut pas être NULL");
         if(!this.mesAeroports.contains(a)){
