@@ -2,7 +2,10 @@ package reservation;
 
 public class Reservation {
 
-    private String client;
+    private Client client;
+
+    private String numero;
+
 
     public Reservation() {
     }
