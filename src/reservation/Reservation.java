@@ -21,6 +21,7 @@ public class Reservation {
         this.setClient(client);
         this.setNumero(numero);
         this.setDate(date);
+        this.confirme = false;
     }
 
     public Date getDate() {
