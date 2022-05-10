@@ -11,6 +11,9 @@ public class Compagnie {
     private Collection<Vol> vols = new ArrayList<>();
 
 
+    public Compagnie(){
+        
+    }
     public Compagnie(String name) {
         Objects.requireNonNull(name);
         this.name = name;

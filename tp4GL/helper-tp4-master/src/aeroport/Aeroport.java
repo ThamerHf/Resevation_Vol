@@ -9,15 +9,14 @@ public class Aeroport {
     //private String ville;
     private ArrayList<Ville> mesVilles;
 
-    public Aeroport(String nom, Ville...villes) {
-        Objects.requireNonNull(nom, "Nom doit être non null");
-        Objects.requireNonNull(villes, "Ville doit être non null");
-        this.nom = nom;
+    public Aeroport(String nom, ArrayList<Ville> villes) {
+        this.setNom(nom);
         this.mesVilles = new ArrayList<Ville>();
         for(Ville i: villes){
             addVille(i);
         }
     }
+
 
     public String getNom(){
         return this.nom;

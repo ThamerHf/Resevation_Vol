@@ -7,24 +7,15 @@ import java.util.Objects;
 
 public class Escale{
 
-    private Vol vol;
     private Aeroport aeroport;
     private Date dateDepart;
     private Date dateArrivee;
 
-    public Escale(Date dateDepart, Date dateArrivee, Vol vol, Aeroport aeroport) throws IllegalArgumentException{
-        Objects.requireNonNull(vol);
-        
+    public Escale(Date dateDepart, Date dateArrivee, Aeroport aeroport) throws IllegalArgumentException{
         setAeroport(aeroport);
-
-        if(vol.getDepart().equals(vol.getArrivee())){
-            throw new IllegalArgumentException("Erreur aeroport de depart doit être différent de l'aeroport d'arrivée");
-        }
-
-        this.dateDepart = dateDepart;
-        this.dateArrivee = dateArrivee;
-        this.vol = vol;
-        this.aeroport = aeroport;
+        setDateDepart(dateDepart);
+        setDateArrivee(dateArrivee);
+        setAeroport(aeroport);
     }
 
     public Duration obtenirDuree() {
@@ -68,6 +59,7 @@ public class Escale{
 
     public void setAeroport(Aeroport a){
         Objects.requireNonNull(a);
+        if(this.vol.isIllegal(a));
         this.aeroport = a;
     }
     
