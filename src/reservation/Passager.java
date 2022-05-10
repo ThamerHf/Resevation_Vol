@@ -19,5 +19,25 @@ public class Passager {
         this.nom = nom;
     }
 
+    public ArrayList<Reservation> getReservations() {
+        return this.reservations;
+    }
+
+    public void setReservation(ArrayList<Reservation> reservation) {
+        Objects.requireNonNull(reservation, "reservation doit être non NULL");
+        this.reservations = reservation;
+    }
+
+    public void addReservation(Reservation reservation){
+        Objects.requireNonNull(reservation, "reservvation ne doit pas être null");
+        
+        this.reservations.add(reservation);
+    }
+
+    public void removeReservation(Reservation reservation){
+        Objects.requireNonNull(reservation, "reservvation ne doit pas être null");
+        this.reservations.remove(reservation);
+    }
+
 
 }

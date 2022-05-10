@@ -56,6 +56,10 @@ public class Client {
         Objects.requireNonNull(reference, "reference doit être non NULL");
         this.reference = reference;
     }
+    
+    public ArrayList<Reservation> getReservations() {
+        return this.reservations;
+    } 
 
     public void setReservation(ArrayList<Reservation> reservation) {
         Objects.requireNonNull(reservation, "reservation doit être non NULL");

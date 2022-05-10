@@ -11,17 +11,29 @@ public class Reservation {
 
     private Client client;
 
+    private Passager passager;
+
     private String numero;
 
     private Date date;
 
     private boolean confirme;
 
-    public Reservation(Client client, String numero, Date date) {
+    public Reservation(Client client, Passager passager, String numero, Date date) {
         this.setClient(client);
+        this.setPassager(passager);
         this.setNumero(numero);
         this.setDate(date);
         this.confirme = false;
+    }
+
+    public Passager getPassager() {
+        return this.passager;
+    }
+
+    public void setPassager(Passager passager) {
+        Objects.requireNonNull(passager, "passager ne doit pas être NULL");
+        this.passager = passager;
     }
 
     public Date getDate() {
