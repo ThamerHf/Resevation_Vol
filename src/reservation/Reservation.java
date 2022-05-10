@@ -3,11 +3,15 @@ package reservation;
 import java.lang.ref.Cleaner.Cleanable;
 import java.util.Date;
 import java.util.Objects;
+import java.lang.Integer;
+
+import aeroport.Compagnie;
+
 import java.util.ArrayList;
 
 public class Reservation {
 
-    private static ArrayList<String> numReservation = new ArrayList<>();
+    private static int next = 0;
 
     private Client client;
 
@@ -15,14 +19,17 @@ public class Reservation {
 
     private String numero;
 
+    private Compagnie compagnie;
+
     private Date date;
 
     private boolean confirme;
 
-    public Reservation(Client client, Passager passager, String numero, Date date) {
+    public Reservation(Client client, Passager passager, Compagnie compagnie, Date date) {
         this.setClient(client);
         this.setPassager(passager);
-        this.setNumero(numero);
+        this.setNumero();
+        this.setCompagnie(compagnie);
         this.setDate(date);
         this.confirme = false;
     }
@@ -49,15 +56,14 @@ public class Reservation {
         return this.numero;
     }
 
-    public void setNumero(String numero) throws IllegalArgumentException{
-        Objects.requireNonNull(numero, "numero ne doit pas être NULL");
-        if(numReservation.contains(numero)){
-            throw new IllegalArgumentException("Numéro de Reservation existe déja, choisir un autre");
+    private String setNumero() {
+        next++;
+        Integer i = new Integer(next);
+        
+        if(compagnie.getName().length() < 3) {
+            return compagnie.getName().concat(i.toString());
         }
-        else{
-            numReservation.add(numero);
-            this.numero = numero;
-        }
+        return compagnie.getName().substring(0, 2).concat(i.toString());
     }
 
     public Client getClient() {
@@ -67,6 +73,15 @@ public class Reservation {
     public void setClient(Client client) {
         Objects.requireNonNull(client, "client ne doit pas être NULL");
         this.client = client;
+    }
+
+    public Compagnie getCompagnie() {
+        return this.compagnie;
+    }
+
+    public void setCompagnie(Compagnie companie) {
+        Objects.requireNonNull(companie, "companie ne doit pas être NULL");
+        this.compagnie = companie;
     }
 
     public void confirmer() {
