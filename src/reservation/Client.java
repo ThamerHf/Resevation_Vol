@@ -77,7 +77,15 @@ public class Client {
         this.reservations.remove(reservation);
     }
 
-
+    @Override
+    public String toString() {
+        String s = new String("Client: " + this.getNom() + "\nReference: " + this.getReference() + "\nContact: " + this.getContact());
+        
+        for(Reservation r: this.reservations){
+            s = s + "\nReservation numero: " + r.getNumero() + " Vol: " + r.getVOl().toString();
+        }
+        return s;
+    }
     
     
 }

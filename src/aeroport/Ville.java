@@ -47,7 +47,7 @@ public class Ville{
         String s = new String(this.getNom() + " est desservie par: \n");
 
         for(Aeroport a : this.mesAeroports){
-            s = s + a.getNom();
+            s = s + a.getNom() + "\n";
         }
         return s;
     }
