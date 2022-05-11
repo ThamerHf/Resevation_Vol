@@ -40,12 +40,11 @@ public class Vol {
     }
 
     public void setDateDepart(Date dateDepart) throws IllegalArgumentException {
-        //Objects.requireNonNull(dateDepart);
-        if(dateDepart == null){
-            throw new IllegalArgumentException("La date ne peut pas être null");
-        }
-        if(dateDepart.after(this.dateArrivee)) {
-            throw new IllegalArgumentException("La date de départ ne peut pas être après celle d'arrivée");
+        Objects.requireNonNull(dateDepart);
+        if(this.dateArrivee != null) {
+            if(dateDepart.compareTo(this.dateArrivee) < 0) {
+                throw new IllegalArgumentException("La date de départ ne peut pas être après celle d'arrivée");
+            }
         }
         this.dateDepart = dateDepart;
     }
@@ -54,16 +53,17 @@ public class Vol {
         return dateArrivee;
     }
 
-    public void setDateArrivee(Date dateArrivee) throws IllegalArgumentException{
-        //Objects.requireNonNull(dateArrivee);
-        if(dateArrivee == null){
-            throw new IllegalArgumentException("La date ne peut pas être null");
-        }
-        if(this.dateDepart.after(dateArrivee)) {
-            throw new IllegalArgumentException("La date d'arrivée ne peut pas être avant celle de départ");
+    public void setDateArrivee(Date dateArrivee) {
+        Objects.requireNonNull(dateArrivee);
+        if(this.dateDepart != null) {
+            if(this.dateDepart.compareTo(dateArrivee) > 0) {
+                throw new IllegalArgumentException("La date d'arrivée ne peut pas être avant celle de départ");
+            }
         }
         this.dateArrivee = dateArrivee;
     }
+
+
 
     public Vol(){
         this.mesEscales = new ArrayList<Escale>();
@@ -74,7 +74,7 @@ public class Vol {
         this.setNumero(numero);
     }
 
-    public Vol(String numero, Aeroport depart, Aeroport Arrivee, Date departDate, Date dateArrivee) {
+    public Vol(String numero, Aeroport depart, Aeroport arrivee, Date dateDepart, Date dateArrivee) {
         this(numero);
         this.setDepart(depart);
         this.setArrivee(arrivee);
@@ -119,11 +119,8 @@ public class Vol {
         return depart;
     }
 
-    public void setDepart(Aeroport depart) throws IllegalArgumentException{
-        //Objects.requireNonNull(depart, "l'aeroport ne peut pas être NULL");
-        if(depart == null){
-            throw new IllegalArgumentException("l'aeroport ne peut pas être NULL");
-        }
+    public void setDepart(Aeroport depart) {
+        Objects.requireNonNull(depart, "l'aeroport ne peut pas être NULL");
         this.depart = depart;
     }
 
@@ -131,11 +128,8 @@ public class Vol {
         return arrivee;
     }
 
-    public void setArrivee(Aeroport arrivee) throws IllegalArgumentException{
-        //Objects.requireNonNull(arrivee, "l'aeroport ne peut pas être NULL");
-        if(depart == null){
-            throw new IllegalArgumentException("l'aeroport ne peut pas être NULL");
-        }
+    public void setArrivee(Aeroport arrivee) {
+        Objects.requireNonNull(arrivee, "l'aeroport ne peut pas être NULL");
         this.arrivee = arrivee;
     }
 

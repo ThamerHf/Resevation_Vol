@@ -39,4 +39,17 @@ public class Ville{
         }
     }
 
+    @Override
+    public String toString() {
+        if(this.mesAeroports.isEmpty()) {
+            return this.getNom() + " n'est desservie par aucun aeroport" ;
+        }
+        String s = new String(this.getNom() + " est desservie par: \n");
+
+        for(Aeroport a : this.mesAeroports){
+            s = s + a.getNom();
+        }
+        return s;
+    }
+
 }

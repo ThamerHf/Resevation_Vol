@@ -57,6 +57,7 @@ public class Start {
 
         Date dd = new Date(2022, 4, 22, 6, 45);
         Date da = new Date(2022, 4, 22, 7, 45);
+        Date d3 = da;
 
         Aeroport a1 = new Aeroport("Orly");
         Aeroport a2 = new Aeroport("Carthage");
@@ -64,6 +65,8 @@ public class Start {
         Compagnie c1 = new Compagnie("Air France");
 
         Vol v1 = new Vol("AF144", a1, a2, dd, da);
+        /*v1.setDateArrivee(da);
+        v1.setDateDepart(dd);*/
 
         System.out.println(v1.getDateDepart().toString());
 
