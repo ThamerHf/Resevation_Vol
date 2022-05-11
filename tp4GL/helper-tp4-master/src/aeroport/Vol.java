@@ -2,10 +2,11 @@ package aeroport;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
-import java.util.Objects; 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.Objects;
 
 public class Vol {
 
@@ -59,7 +60,7 @@ public class Vol {
     }
 
     public Vol(){
-        this.mesEscales = new ArrayList<>();
+        this.mesEscales = new ArrayList<Escale>();
     }
 
     public Vol(String numero) {
@@ -126,11 +127,47 @@ public class Vol {
         this.arrivee = arrivee;
     }
 
-
-    public void addEscale(Escale e){
-        Objects.requireNonNull(e);
-        if()
+    public Collection<Escale> getEscales(){
+        return this.mesEscales;
     }
+
+    public void addEscale(Escale e) throws IllegalArgumentException{
+        Objects.requireNonNull(e);
+        if(e.getAeroport().equals(this.depart) || e.getAeroport().equals(this.arrivee)){
+            throw new IllegalArgumentException("L'Aeroport de l'escale doit être différent de l'aeroport de départ et d'arrivée du vol");
+        }
+        if(e.getDateArrivee().after(this.dateArrivee) || e.getDateArrivee().before(this.dateDepart)
+        || e.getDateArrivee().equals(this.dateArrivee) || e.getDateArrivee().equals(this.dateDepart)){
+            throw new IllegalArgumentException("Date d'arrivée de l'escale est invalide");
+        }
+        if(e.getDateDepart().after(this.dateArrivee) || e.getDateDepart().before(this.dateDepart) 
+        || e.getDateDepart().equals(this.dateArrivee) || e.getDateDepart().equals(this.dateDepart)){
+            throw new IllegalArgumentException("Date de départ de l'escale est invalide");
+        }
+
+        for(Escale p : mesEscales){
+            if(p.getAeroport().equals(e.getAeroport())){
+                throw new IllegalArgumentException("Escale Invalide ne peut pas être ajouter : nom d'aeroport");
+            }
+        }
+        int index = 0;
+        Iterator<Escale> iter = mesEscales.iterator();
+        boolean bool = true;
+        while(iter.hasNext() && bool == true){
+            if(iter.next().getDateArrivee().equals(e.getDateArrivee()) || iter.next().getDateDepart().equals(e.getDateDepart()) 
+            || iter.next().getDateDepart().equals(e.getDateArrivee())){
+                throw new IllegalArgumentException("Escale Invalide ne peut pas être ajouter");
+            }
+            if(iter.next().getDateDepart().after(e.getDateArrivee())){
+                bool = false;
+            }
+
+            index ++;
+        }
+
+        ((ArrayList<Escale>)(this.mesEscales)).add(index, e);
+    }
+
 
     public void ouvrirVol() {
         this.statut = true;

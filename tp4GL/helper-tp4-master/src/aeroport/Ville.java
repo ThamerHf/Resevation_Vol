@@ -27,6 +27,13 @@ public class Ville{
         return this.mesAeroports;
     }
 
+    public void setAeroport(ArrayList<Aeroport> a) {
+        Objects.requireNonNull(a);
+        for(Aeroport i : a){
+            addAeroport(i);
+        }
+    }
+
     public void addAeroport(Aeroport a){
         if(!this.mesAeroports.contains(a)){
             this.mesAeroports.add(a);

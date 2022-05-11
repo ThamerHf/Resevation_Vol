@@ -9,9 +9,13 @@ public class Aeroport {
     //private String ville;
     private ArrayList<Ville> mesVilles;
 
-    public Aeroport(String nom, ArrayList<Ville> villes) {
+    public Aeroport(String nom){
         this.setNom(nom);
         this.mesVilles = new ArrayList<Ville>();
+    }
+
+    public Aeroport(String nom, ArrayList<Ville> villes) {
+        this(nom);
         for(Ville i: villes){
             addVille(i);
         }
@@ -39,13 +43,20 @@ public class Aeroport {
         }
     }
 
-    /* public String getVille() {
-        return this.ville;
+    public void setVille(ArrayList<Ville> villes) {
+        Objects.requireNonNull(villes);
+        for(Ville i : villes){
+            addVille(i);
+        }
     }
 
-    public void setVille(String ville) {
-        this.ville = ville;
+    @Override
+    public boolean equals(Object obj){
+        try {
+            return ((Aeroport) obj).getNom().equals(this.getNom());
+        } catch (Exception e){
+            return false;
+        }
     }
-*/
 
 }

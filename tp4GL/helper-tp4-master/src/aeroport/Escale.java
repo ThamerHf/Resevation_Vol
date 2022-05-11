@@ -15,7 +15,6 @@ public class Escale{
         setAeroport(aeroport);
         setDateDepart(dateDepart);
         setDateArrivee(dateArrivee);
-        setAeroport(aeroport);
     }
 
     public Duration obtenirDuree() {
@@ -59,8 +58,6 @@ public class Escale{
 
     public void setAeroport(Aeroport a){
         Objects.requireNonNull(a);
-        if(this.vol.isIllegal(a));
         this.aeroport = a;
     }
-    
 }
