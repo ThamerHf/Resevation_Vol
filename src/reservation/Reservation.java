@@ -3,6 +3,9 @@ package reservation;
 import java.lang.ref.Cleaner.Cleanable;
 import java.util.Date;
 import java.util.Objects;
+
+import javax.print.FlavorException;
+
 import java.lang.Integer;
 
 import aeroport.Compagnie;
@@ -24,6 +27,8 @@ public class Reservation {
 
     private Date date;
 
+    private boolean paye;
+
     private boolean confirme;
 
     public Reservation(Client client, Passager passager, Vol vol, Date date) {
@@ -33,6 +38,7 @@ public class Reservation {
         this.setVol(vol);
         this.setDate(date);
         this.confirme = false;
+        this.paye = false;
     }
 
     public Passager getPassager() {
@@ -48,8 +54,13 @@ public class Reservation {
         return this.date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Date date) throws IllegalArgumentException{
         Objects.requireNonNull(date);
+        if(this.date != null) {
+            if(date.after(this.vol.getDateDepart())){
+                throw new IllegalArgumentException("la reservation ne peut se faire après la date de départ du vol");
+            }
+        }
         this.date = date;
     }
 
@@ -76,7 +87,7 @@ public class Reservation {
         this.client = client;
     }
 
-    public Vol getVOl() {
+    public Vol getVol() {
         return this.vol;
     }
 
@@ -85,12 +96,35 @@ public class Reservation {
         this.vol = vol;
     }
 
-    public void confirmer() {
+    public void payer() throws IllegalCallerException{
+        if(this.vol.getStatut() == false) {
+            throw new IllegalCallerException("la rservation n'est pas disponible");
+        }
+        if(this.paye == true){
+            throw new IllegalCallerException("cette reservation a déjà été payée");
+        }
+        this.paye = true;
+    }
+
+    public void confirmer() throws IllegalCallerException {
+        if(this.vol.getStatut() == false) {
+            throw new IllegalCallerException("la rservation n'est pas disponible");
+        }
+        if(this.paye == false) {
+            throw new IllegalCallerException("la reservation n'a pas été payée");
+        }
         this.confirme = true;
     }
 
-    public void annuler() {
-        this.confirme = false;
+    public void annuler() throws IllegalCallerException{
+        if(this.vol.getStatut() == false) {
+            throw new IllegalCallerException("la rservation ne peut être annulée");
+        }
+        if(this.confirme == true){
+            throw new IllegalCallerException("la reservation ne peut être annulée");
+        }
+        this.paye = false;
+
     }
 
     public String infoReservation() {
