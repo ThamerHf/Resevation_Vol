@@ -17,6 +17,10 @@ public class Aeroport {
         }
     }
 
+    public Aeroport(String nom) {
+        this.setNom(nom);
+    }
+
     public String getNom(){
         return this.nom;
     }

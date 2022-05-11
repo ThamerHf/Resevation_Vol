@@ -1,3 +1,4 @@
+import aeroport.Aeroport;
 import aeroport.Compagnie;
 import aeroport.Vol;
 
@@ -7,7 +8,7 @@ import java.util.Date;
 public class Start {
 
     public static void main(String[] args){
-        Vol volFinal = new Vol();
+        /*Vol volFinal = new Vol();
 
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm");
         String dd = "21/10/2020 13:00";
@@ -52,6 +53,20 @@ public class Start {
 
         for(Vol v : compagnie.getVols()){
             System.out.println(v.getNumero());
-        }
+        }*/
+
+        Date dd = new Date(2022, 4, 22, 6, 45);
+        Date da = new Date(2022, 4, 22, 7, 45);
+
+        Aeroport a1 = new Aeroport("Orly");
+        Aeroport a2 = new Aeroport("Carthage");
+
+        Compagnie c1 = new Compagnie("Air France");
+
+        Vol v1 = new Vol("AF144", a1, a2, dd, da);
+
+        System.out.println(v1.getDateDepart().toString());
+
+
     }
 }
