@@ -82,7 +82,7 @@ public class Client {
         String s = new String("Client: " + this.getNom() + "\nReference: " + this.getReference() + "\nContact: " + this.getContact());
         
         for(Reservation r: this.reservations){
-            s = s + "\nReservation numero: " + r.getNumero() + " Vol: " + r.getVOl().toString();
+            s = s + r.infoReservation();
         }
         return s;
     }

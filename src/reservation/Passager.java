@@ -43,7 +43,7 @@ public class Passager {
     public String toString(){
         String s = new String("Passager: " + this.getNom());
         for(Reservation r: this.reservations){
-            s = s + "\nReservation numero: " + r.getNumero() + " Vol: " + r.getVOl().toString();
+            s = s + r.infoReservation();
         }
         return s;
     }

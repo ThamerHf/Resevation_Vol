@@ -92,4 +92,15 @@ public class Reservation {
     public void annuler() {
         this.confirme = false;
     }
+
+    public String infoReservation() {
+        return "Reservation numero: " + this.getNumero() + " faite le " + this.getDate().toString() + " | Vol: " + this.getVOl().toString();
+    }
+
+    @Override
+    public String toString() {
+        String s = infoReservation();
+        s = s + " pour le client: "  + this.getClient().getNom() + "\nPassager: " + this.getPassager().getNom();
+        return s;
+    }
 }
